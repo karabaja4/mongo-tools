@@ -12,7 +12,7 @@ import (
 	mgo "github.com/10gen/llmgo"
 	"github.com/10gen/llmgo/bson"
 	"github.com/mongodb/mongo-tools/common/options"
-	"github.com/mongodb/mongo-tools/common/password"
+	"github.com/karabaja4/mongo-tools/common/password"
 
 	"fmt"
 	"io"
