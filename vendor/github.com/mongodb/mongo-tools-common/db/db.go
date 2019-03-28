@@ -15,7 +15,7 @@ import (
 	"time"
 
 	"github.com/mongodb/mongo-tools-common/options"
-	"github.com/karabaja4/mongo-tools-common/password"
+	"github.com/mongodb/mongo-tools-common/password"
 	"go.mongodb.org/mongo-driver/mongo"
 	mopt "go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"

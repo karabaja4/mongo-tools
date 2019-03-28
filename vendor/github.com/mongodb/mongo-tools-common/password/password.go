@@ -9,20 +9,11 @@
 package password
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
-	"os/user"
-	"path"
 
 	"github.com/mongodb/mongo-tools-common/log"
 )
-
-// CredConfiguration ...
-type CredConfiguration struct {
-	Password string `json:"password"`
-}
 
 // key constants
 const (
@@ -32,16 +23,11 @@ const (
 	eofKey            = 4
 	newLineKey        = 10
 	carriageReturnKey = 13
-	credFile          = ".mongocred.json"
 )
 
 // Prompt displays a prompt asking for the password and returns the
 // password the user enters as a string.
 func Prompt() string {
-	config, err := readFromFile()
-	if err == nil && config.Password != "" {
-		return config.Password
-	}
 	var pass string
 	if IsTerminal() {
 		log.Logv(log.DebugLow, "standard input is a terminal; reading password from terminal")
@@ -54,20 +40,6 @@ func Prompt() string {
 	}
 	fmt.Fprintln(os.Stderr)
 	return pass
-}
-
-func readFromFile() (*CredConfiguration, error) {
-	usr, err := user.Current()
-	if err != nil {
-		return nil, err
-	}
-	raw, err := ioutil.ReadFile(path.Join(usr.HomeDir, credFile))
-	if err != nil {
-		return nil, err
-	}
-	var config *CredConfiguration
-	json.Unmarshal(raw, &config)
-	return config, nil
 }
 
 // readPassFromStdin pipes in a password from stdin if
